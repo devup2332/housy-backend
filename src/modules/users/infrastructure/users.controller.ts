@@ -6,13 +6,6 @@ import { CreateUserDto } from '../dto/createUser.dto';
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @Get()
-  getUsers() {
-    return {
-      status: '123',
-    };
-  }
-
   @Post('createUser')
   createUser(@Body() data: CreateUserDto) {
     return this.usersService.createUser(data);
@@ -20,6 +13,7 @@ export class UsersController {
 
   @Get('/getUserByEmail/:email')
   getUserByEmail(@Param('email') email: string) {
+    console.log({ email });
     return this.usersService.getUserByEmail(email);
   }
 
