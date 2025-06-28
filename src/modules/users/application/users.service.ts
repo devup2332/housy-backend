@@ -14,7 +14,6 @@ export class UsersService {
   }
 
   getUserById(id: string) {
-    console.log('Fetching user by ID:', id);
     return this.usersRepository.getUserById(id);
   }
 }

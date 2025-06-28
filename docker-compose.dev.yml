@@ -1,13 +1,13 @@
 services:
   api:
-    container_name: gestora-backend 
-    image: gestora-backend
+    container_name: gestora-api 
+    image: gestora-api
     build:
       context: .
       dockerfile: Dockerfile.dev
     command: bun start:dev 
     volumes:
-      - "./:/api"
+      - "./:/app"
     mem_limit: 2G
     env_file:
       - .env.development
