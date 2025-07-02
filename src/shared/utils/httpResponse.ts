@@ -1,7 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
 
 export class HttpResponseDto {
-  status: HttpStatus;
+  status: HttpStatus = 200;
   message: string;
   data: Record<string, any> | any[] | null;
   constructor({

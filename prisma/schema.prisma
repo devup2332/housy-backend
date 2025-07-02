@@ -19,14 +19,44 @@ enum AuthProvider {
   email
 }
 
+enum ProductStatus {
+  active
+  inactive
+  discontinued
+  out_of_stock
+}
+
 model User {
-  id         String  @id @default(uuid()) @db.Uuid
-  email      String  @unique
+  id         String       @id @default(uuid()) @db.Uuid
+  email      String       @unique
   first_name String?
   last_name  String?
   photo_url  String?
-  provider   AuthProvider @default(email) 
+  provider   AuthProvider @default(email)
+  created_at DateTime     @default(now())
+  updated_at DateTime     @updatedAt
+  is_deleted Boolean      @default(false)
+}
 
+model Product {
+  id          String        @id @default(uuid()) @db.Uuid
+  name        String
+  description String?
+  sales_price Decimal       @db.Decimal(10, 2)
+  cost_price  Decimal       @db.Decimal(10, 2)
+  quantity    Decimal       @db.Decimal(10, 2)
+  status      ProductStatus @default(active)
+  created_by  String?       @db.Uuid
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @updatedAt
+  is_deleted  Boolean       @default(false)
+}
+
+model ProductImage {
+  id         String   @id @default(uuid()) @db.Uuid
+  product_id String   @db.Uuid
+  url        String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
 }
