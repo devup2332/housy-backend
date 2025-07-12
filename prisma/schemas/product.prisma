@@ -1,0 +1,41 @@
+enum ProductStatus {
+  active 
+  inactive 
+  out_of_stock
+  discontinued
+  draft
+  archived
+}
+
+enum ProductCurrency {
+  USD
+  PEN
+  EUR
+}
+
+model Product {
+  id          String        @id @default(uuid()) @db.Uuid
+  name        String
+  description String?
+  sales_price Decimal       @db.Decimal(10, 2)
+  cost_price  Decimal       @db.Decimal(10, 2)
+  company_id  String        @db.Uuid
+  quantity    Int
+  status      ProductStatus @default(active)
+  currency    ProductCurrency      @default(USD)
+  category_id String        @db.Uuid
+  created_by  String        @db.Uuid
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @updatedAt
+  is_deleted  Boolean       @default(false)
+}
+
+model ProductImage {
+  id         String   @id @default(uuid()) @db.Uuid
+  product_id String   @db.Uuid
+  url        String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_primary Boolean  @default(false)
+  is_deleted Boolean  @default(false)
+}

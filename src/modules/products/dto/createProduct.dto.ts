@@ -5,15 +5,7 @@ import {
   IsString,
   IsUUID,
 } from 'class-validator';
-
-export const statusOptions = [
-  'active',
-  'inactive',
-  'out_of_stock',
-  'discontinued',
-] as const;
-
-export type Status = (typeof statusOptions)[number];
+import { ProductStatus } from 'generated';
 
 export class CreateProductDto {
   @IsUUID()
@@ -36,10 +28,16 @@ export class CreateProductDto {
   @IsNumber()
   quantity: number;
 
-  @IsEnum(statusOptions)
-  status: Status;
+  @IsEnum(ProductStatus)
+  status: ProductStatus;
 
   @IsUUID()
   @IsOptional()
-  created_by?: string;
+  created_by: string;
+
+  @IsUUID()
+  company_id: string;
+
+  @IsUUID()
+  category_id: string;
 }

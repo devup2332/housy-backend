@@ -1,4 +1,4 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class GetProductsTableDto {
   @IsNumber()
@@ -10,4 +10,7 @@ export class GetProductsTableDto {
   @IsOptional()
   @IsString()
   search?: string;
+
+  @IsUUID()
+  companyId: string;
 }

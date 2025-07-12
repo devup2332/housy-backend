@@ -1,0 +1,31 @@
+enum UserProvider {
+  google
+  email
+}
+
+enum UserRole {
+  owner
+  admin
+  staff
+}
+
+enum UserPlan {
+  free
+  pro
+  enterprise
+}
+
+model User {
+  id         String       @id @default(uuid()) @db.Uuid
+  email      String       @unique
+  first_name String
+  last_name  String
+  provider   UserProvider @default(email)
+  user_role  UserRole     @default(owner)
+  is_deleted Boolean      @default(false)
+  plan       UserPlan     @default(free)
+  photo_url  String?
+  company_id String?      @db.Uuid
+  created_at DateTime     @default(now())
+  updated_at DateTime     @updatedAt
+}

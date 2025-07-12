@@ -1,4 +1,4 @@
-import { IsString, IsUUID } from 'class-validator';
+import { IsBoolean, IsString, IsUUID } from 'class-validator';
 
 export class CreateProductImageDto {
   @IsString()
@@ -6,4 +6,10 @@ export class CreateProductImageDto {
 
   @IsUUID()
   product_id: string;
+
+  @IsBoolean()
+  is_deleted: boolean;
+
+  @IsBoolean()
+  is_primary: boolean;
 }

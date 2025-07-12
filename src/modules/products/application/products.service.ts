@@ -13,4 +13,8 @@ export class ProductsService {
   getProductsTable(filters: GetProductsTableDto) {
     return this._productsRepository.getProductsTable(filters);
   }
+
+  deleteProduct(id: string) {
+    return this._productsRepository.deleteProduct(id);
+  }
 }

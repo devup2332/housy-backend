@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -11,12 +12,12 @@ import {
 import { ProductsService } from '../application/products.service';
 import { HttpResponseDto } from '@/shared/utils/httpResponse';
 import { CreateProductDto } from '../dto/createProduct.dto';
-import { JwtAuthGuard } from '@/common/guards/JwtAuthGuard.guard';
-import { RequestWithUser } from '@/common/interfaces/requestWithUser.interface';
 import { GetProductsTableDto } from '../dto/getProductsTable.dto';
+import { UserAuthGuard } from '@/shared/guards/UserAuth.guard';
+import { RequestWithUser } from '@/shared/interfaces/requestWithUser.interface';
 
 @Controller('products')
-@UseGuards(JwtAuthGuard)
+@UseGuards(UserAuthGuard)
 export class ProductsController {
   constructor(private _productsService: ProductsService) {}
   @Post('createProduct')
@@ -46,11 +47,13 @@ export class ProductsController {
     @Query('search') search: string,
     @Query('limit') limit: number,
     @Query('page') page: number,
+    @Query('companyId') companyId: string,
   ) {
     const filters: GetProductsTableDto = {
       search,
       limit,
       page,
+      companyId,
     };
     try {
       const data = await this._productsService.getProductsTable(filters);
@@ -59,7 +62,26 @@ export class ProductsController {
         status: 200,
         message: 'Products fetched successfully',
       });
-    } catch {
+    } catch (err) {
+      console.log({ err });
+      return new HttpResponseDto({
+        status: 500,
+        message: 'Unable to get products',
+      });
+    }
+  }
+
+  @Delete('deleteProduct/:id')
+  async deleteProduct(@Param('id') id: string) {
+    try {
+      const data = await this._productsService.deleteProduct(id);
+      return new HttpResponseDto({
+        data,
+        status: 200,
+        message: 'Products fetched successfully',
+      });
+    } catch (err) {
+      console.log({ err });
       return new HttpResponseDto({
         status: 500,
         message: 'Unable to get products',

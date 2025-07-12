@@ -1,0 +1,11 @@
+model Sales {
+  id          String   @id @default(uuid()) @db.Uuid
+  product_id  String   @db.Uuid
+  quantity    Int
+  category_id String   @db.Uuid
+  company_id String   @db.Uuid
+  selled_by   String   @db.Uuid
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  is_deleted  Boolean  @default(false)
+}
