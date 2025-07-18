@@ -11,11 +11,11 @@ export class CreateCategoryUseCase {
     const category = new CategoryEntity(
       uuidv4(),
       data.name,
-      data.description,
       data.company_id,
       data.is_active,
       data.image_url,
       false,
+      data.description,
     );
     return this._catRepo.createCategory(category);
   }

@@ -5,6 +5,9 @@ import { CategoriesController } from './infrastructure/controllers/categories.co
 import { GetCategoriesPerCompanyUseCase } from './application/use-cases/getCategoriesPerCompany.use-case';
 import { CategoriesRepository } from './infrastructure/repositories/categories.repository';
 import { CreateCategoryUseCase } from './application/use-cases/createCategory.use-case';
+import { DeleteCategoryUseCase } from './application/use-cases/deleteCategory.use-case';
+import { ProductsRepository } from '../products/insfrastructure/products.repository';
+import { ProductsModule } from '../products/products.module';
 
 @Module({
   controllers: [CategoriesController],
@@ -12,7 +15,8 @@ import { CreateCategoryUseCase } from './application/use-cases/createCategory.us
     GetCategoriesPerCompanyUseCase,
     CreateCategoryUseCase,
     CategoriesRepository,
+    DeleteCategoryUseCase,
   ],
-  imports: [PrismaModule, KnexModule],
+  imports: [PrismaModule, KnexModule, ProductsModule],
 })
 export class CategoriesModule {}

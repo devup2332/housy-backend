@@ -1,4 +1,4 @@
-import { IsBoolean, IsString, IsUUID } from 'class-validator';
+import { IsBoolean, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class CreateCategoryDto {
   @IsString()
@@ -8,7 +8,8 @@ export class CreateCategoryDto {
   company_id: string;
 
   @IsString()
-  description: string;
+  @IsOptional()
+  description?: string;
 
   @IsBoolean()
   is_active: boolean;

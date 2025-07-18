@@ -8,10 +8,10 @@ export class CategoriesRepository implements ICategoriesRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async getCategoriesPerCompany(id: string) {
-    console.log({ id });
     const r = await this.prisma.category.findMany({
       where: {
         company_id: id,
+        is_deleted: false,
       },
     });
     return r;
@@ -20,6 +20,18 @@ export class CategoriesRepository implements ICategoriesRepository {
   async createCategory(data: CategoryEntity) {
     const r = await this.prisma.category.create({
       data,
+    });
+    return r.id;
+  }
+
+  async deleteCategory(id: string) {
+    const r = await this.prisma.category.update({
+      where: {
+        id,
+      },
+      data: {
+        is_deleted: true,
+      },
     });
     return r.id;
   }

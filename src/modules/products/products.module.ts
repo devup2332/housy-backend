@@ -9,5 +9,6 @@ import { KnexModule } from '@/infrastructure/database/knex/knex.module';
   controllers: [ProductsController],
   imports: [PrismaModule, KnexModule],
   providers: [ProductsService, ProductsRepository],
+  exports: [ProductsRepository],
 })
 export class ProductsModule {}

@@ -18,6 +18,18 @@ export class ProductsRepository {
     });
   }
 
+  async deleteProductByCategory(categoryId: string) {
+    const r = await this._prismaService.product.updateMany({
+      where: {
+        category_id: categoryId,
+      },
+      data: {
+        is_deleted: true,
+      },
+    });
+    return r.count;
+  }
+
   async deleteProduct(id: string) {
     const p = await this._prismaService.product.update({
       where: { id },
