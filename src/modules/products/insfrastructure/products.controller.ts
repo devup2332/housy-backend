@@ -15,6 +15,7 @@ import { CreateProductDto } from '../dto/createProduct.dto';
 import { GetProductsTableDto } from '../dto/getProductsTable.dto';
 import { UserAuthGuard } from '@/shared/guards/UserAuth.guard';
 import { RequestWithUser } from '@/shared/interfaces/requestWithUser.interface';
+import { Response } from 'express';
 
 @Controller('products')
 @UseGuards(UserAuthGuard)
@@ -26,6 +27,7 @@ export class ProductsController {
     @Req() req: RequestWithUser,
   ) {
     try {
+      console.log({ body: product });
       const data = await this._productsService.createProduct({
         ...product,
         created_by: req.user.id,

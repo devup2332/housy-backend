@@ -5,7 +5,7 @@ import {
   IsString,
   IsUUID,
 } from 'class-validator';
-import { ProductStatus } from 'generated';
+import { ProductCurrency, ProductStatus } from 'generated';
 
 export class CreateProductDto {
   @IsUUID()
@@ -19,6 +19,15 @@ export class CreateProductDto {
   @IsOptional()
   description?: string;
 
+  @IsString()
+  brand: string;
+
+  @IsString()
+  sku: string;
+
+  @IsEnum(ProductCurrency)
+  currency: ProductCurrency;
+
   @IsNumber()
   sales_price: number;
 
@@ -27,6 +36,9 @@ export class CreateProductDto {
 
   @IsNumber()
   quantity: number;
+
+  @IsNumber()
+  min_stock: number;
 
   @IsEnum(ProductStatus)
   status: ProductStatus;

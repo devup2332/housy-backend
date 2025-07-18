@@ -1,6 +1,6 @@
 enum ProductStatus {
-  active 
-  inactive 
+  active
+  inactive
   out_of_stock
   discontinued
   draft
@@ -14,20 +14,28 @@ enum ProductCurrency {
 }
 
 model Product {
-  id          String        @id @default(uuid()) @db.Uuid
+  id          String          @id @default(uuid()) @db.Uuid
   name        String
   description String?
-  sales_price Decimal       @db.Decimal(10, 2)
-  cost_price  Decimal       @db.Decimal(10, 2)
-  company_id  String        @db.Uuid
+  sales_price Decimal         @db.Decimal(10, 2)
+  cost_price  Decimal         @db.Decimal(10, 2)
+  brand       String
+  sku         String
+  company_id  String          @db.Uuid
   quantity    Int
-  status      ProductStatus @default(active)
-  currency    ProductCurrency      @default(USD)
-  category_id String        @db.Uuid
-  created_by  String        @db.Uuid
-  created_at  DateTime      @default(now())
-  updated_at  DateTime      @updatedAt
-  is_deleted  Boolean       @default(false)
+  min_stock   Int
+  weight      Decimal?
+  height      Decimal?
+  width       Decimal?
+  length      Decimal?
+  color       String?
+  status      ProductStatus   @default(active)
+  currency    ProductCurrency @default(USD)
+  category_id String          @db.Uuid
+  created_by  String          @db.Uuid
+  created_at  DateTime        @default(now())
+  updated_at  DateTime        @updatedAt
+  is_deleted  Boolean         @default(false)
 }
 
 model ProductImage {
