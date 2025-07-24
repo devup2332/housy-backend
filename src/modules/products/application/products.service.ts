@@ -14,7 +14,19 @@ export class ProductsService {
     return this._productsRepository.getProductsTable(filters);
   }
 
+  getProduct(id: string) {
+    return this._productsRepository.getProduct(id);
+  }
+
+  updateProduct(id: string, product: CreateProductDto) {
+    return this._productsRepository.updateProduct(id, product);
+  }
+
   deleteProduct(id: string) {
     return this._productsRepository.deleteProduct(id);
+  }
+
+  deleteMultipleProducts(ids: string[]) {
+    return this._productsRepository.deleteMultipleProducts(ids);
   }
 }

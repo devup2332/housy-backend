@@ -12,4 +12,7 @@ export class CreateProductImageDto {
 
   @IsBoolean()
   is_primary: boolean;
+
+  @IsString()
+  name: string;
 }

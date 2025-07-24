@@ -9,4 +9,11 @@ export class ProductImagesRepository {
   createProductImage(data: CreateProductImageDto) {
     return this._prismaService.productImage.create({ data });
   }
+
+  deleteProductImage(id: string) {
+    return this._prismaService.productImage.update({
+      where: { id },
+      data: { is_deleted: true },
+    });
+  }
 }

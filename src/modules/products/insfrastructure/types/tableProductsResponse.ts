@@ -7,7 +7,15 @@ export interface TableProductRow {
   currency: string;
   company_id: string;
   quantity: string;
+  min_stock: string;
   status: string;
+  width: string;
+  height: string;
+  weight: string;
+  length: string;
+  sku: string;
+  brand: string;
+  color: string;
   created_by: string;
   created_at: string;
   updated_at: string;

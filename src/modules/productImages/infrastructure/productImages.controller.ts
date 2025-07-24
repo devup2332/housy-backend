@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
 import { ProductImagesService } from '../application/productImages.service';
 import { CreateProductImageDto } from '../dto/createProductImage.dto';
 import { HttpResponseDto } from '@/shared/utils/httpResponse';
@@ -22,5 +22,17 @@ export class ProductImagesController {
         message: 'Unexpected Error',
       });
     }
+  }
+
+  @Delete('deleteProductImage/:id')
+  async deleteProductImage(@Param('id') id: string) {
+    const data = await this._productImagesService.deleteProductImage(id);
+    return new HttpResponseDto({
+      status: 200,
+      message: 'Product image deleted successfully',
+      data: {
+        id: data.id,
+      },
+    });
   }
 }

@@ -10,4 +10,8 @@ export class ProductImagesService {
   createProductImage(data: CreateProductImageDto) {
     return this._productImagesRepository.createProductImage(data);
   }
+
+  deleteProductImage(id: string) {
+    return this._productImagesRepository.deleteProductImage(id);
+  }
 }

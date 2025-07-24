@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Query,
   Req,
   UseGuards,
@@ -15,7 +16,6 @@ import { CreateProductDto } from '../dto/createProduct.dto';
 import { GetProductsTableDto } from '../dto/getProductsTable.dto';
 import { UserAuthGuard } from '@/shared/guards/UserAuth.guard';
 import { RequestWithUser } from '@/shared/interfaces/requestWithUser.interface';
-import { Response } from 'express';
 
 @Controller('products')
 @UseGuards(UserAuthGuard)
@@ -59,6 +59,50 @@ export class ProductsController {
     };
     try {
       const data = await this._productsService.getProductsTable(filters);
+      return new HttpResponseDto({
+        data,
+        status: 200,
+        message: 'Products fetched successfully',
+      });
+    } catch (err) {
+      console.log({ err });
+      return new HttpResponseDto({
+        status: 500,
+        message: 'Unable to get products',
+      });
+    }
+  }
+
+  @Put('updateProduct/:id')
+  async updateProduct(
+    @Param('id') id: string,
+    @Body() product: CreateProductDto,
+  ) {
+    const data = await this._productsService.updateProduct(id, product);
+
+    return new HttpResponseDto({
+      data: {
+        id: data.id,
+      },
+      status: 200,
+      message: 'Products fetched successfully',
+    });
+  }
+
+  @Get('getProduct/:id')
+  async getProduct(@Param('id') id: string) {
+    const data = await this._productsService.getProduct(id);
+    return new HttpResponseDto({
+      data,
+      status: 200,
+      message: 'Products fetched successfully',
+    });
+  }
+
+  @Post('deleteMultipleProducts')
+  async deleteMultipleProducts(@Body() ids: string[]) {
+    try {
+      const data = await this._productsService.deleteMultipleProducts(ids);
       return new HttpResponseDto({
         data,
         status: 200,
