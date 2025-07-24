@@ -15,4 +15,7 @@ export class CreateProductImageDto {
 
   @IsString()
   name: string;
+
+  @IsString()
+  public_id: string;
 }

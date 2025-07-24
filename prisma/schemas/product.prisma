@@ -41,10 +41,11 @@ model Product {
 model ProductImage {
   id         String   @id @default(uuid()) @db.Uuid
   product_id String   @db.Uuid
-  name       String?  
+  name       String?
   url        String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
   is_primary Boolean  @default(false)
   is_deleted Boolean  @default(false)
+  public_id  String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }

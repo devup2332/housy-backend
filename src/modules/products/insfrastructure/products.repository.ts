@@ -77,6 +77,7 @@ export class ProductsRepository {
                 'url',pi.url,
                 'is_primary',pi.is_primary,
                 'name', pi.name,
+                'public_id', pi.public_id,
                 'is_deleted',pi.is_deleted
               ) ORDER BY pi.created_at ASC
             ) FILTER (WHERE pi.is_deleted = false), 
